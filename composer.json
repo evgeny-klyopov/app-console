@@ -1,6 +1,8 @@
 {
     "name": "alva/app-console",
     "description": "Core for app console",
+    "type": "library",
+    "homepage": "https://klepov.info",
     "authors": [
         {
             "name": "Alva",
