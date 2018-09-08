@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+define('PATH', __DIR__);
+define('DS', DIRECTORY_SEPARATOR);
+define('PATH_COMMANDS', PATH . DS . 'src' . DS . 'Commands');
+define('PATH_HELPERS', PATH . DS . 'src' . DS . 'Helpers');
+define('NAMESPACE_COMMANDS', 'Alva\AppConsole\Commands');
+define('NAMESPACE_HELPERS', 'Alva\AppConsole\Helpers');
+
+require PATH . '/vendor/autoload.php';
+use Alva\AppConsole\Application;
+
+(new Application())->run();
