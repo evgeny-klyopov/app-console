@@ -3,8 +3,10 @@
 namespace Alva\AppConsole;
 
 use Alva\AppConsole\Traits\writeMessage;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Alva\AppConsole\Helpers\Base;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -28,7 +30,40 @@ abstract class Command extends SymfonyCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->setInput($input)->setOutput($output)->registerHelpers()->exec();
+        $this->setInput($input)->setOutput($output)->registerHelpers();
+        $debugLevel = $input->getArgument('debugLevel');
+
+        if (null !== $debugLevel && \preg_match('/^v+$/', $debugLevel)) {
+            $this->debugLevel = \mb_strlen($debugLevel);
+        }
+
+        $this->exec();
+    }
+
+    /**
+     *  Configure command
+     *
+     * @throws \ReflectionException
+     */
+    protected function configure()
+    {
+        $this->config();
+        $this->addArgument('debugLevel', InputArgument::OPTIONAL, 'Debug');
+    }
+
+    /**
+     * Un camel case, ExampleTest -> example-test
+     *
+     * @param string $str
+     *
+     * @return string
+     */
+    private function unCamelCase(string $str): string
+    {
+        $str = preg_replace('/([a-z])([A-Z])/', "\\1-\\2", $str);
+        $str = strtolower($str);
+
+        return $str;
     }
 
     /**
@@ -37,6 +72,23 @@ abstract class Command extends SymfonyCommand
      * @return mixed
      */
     abstract protected function exec();
+
+    /**
+     * Configure command
+     *
+     * @return mixed
+     * @throws \ReflectionException
+     */
+    protected function config()
+    {
+        $action = $this->unCamelCase((new \ReflectionClass($this))->getShortName());
+
+        $this
+            ->setName('app:' . $action)
+            ->setAliases([$action])
+            ->setDescription($action)
+            ->setHelp('./mt ' . $action . ' or ./mt app:' . $action);
+    }
 
     /**
      * Register helpers

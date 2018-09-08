@@ -13,6 +13,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 trait writeMessage
 {
     /**
+     * @var int
+     */
+    protected $debugLevel = 0;
+    /**
      * @var string
      */
     protected static $MESSAGE_INFO = 'fg=cyan';
@@ -143,5 +147,18 @@ trait writeMessage
     protected function writeComment($messages, bool $return = false, bool $lineBreak = true)
     {
         $this->write($messages, self::$MESSAGE_COMMENT, $return, $lineBreak);
+    }
+
+    /**
+     * Debug
+     *
+     * @param $messages
+     * @param int $level
+     */
+    protected function debug($messages, int $level)
+    {
+        if ($this->debugLevel === $level) {
+            $this->writeInfo($messages);
+        }
     }
 }

@@ -12,18 +12,6 @@ use Alva\AppConsole\Command;
 class ExampleTest extends Command
 {
     /**
-     *  Configure command
-     */
-    protected function configure()
-    {
-        $this
-            ->setName('app:example-test')
-            ->setAliases(['example-test'])
-            ->setDescription('example-test')
-            ->setHelp('./mt example-test or ./mt app:example-test');
-    }
-
-    /**
      * Execute
      *
      * @return mixed|void
@@ -37,5 +25,9 @@ class ExampleTest extends Command
         $this->writeComment('message comment');
 
         $this->getHelper('exampleTest')->printMessage();
+
+        $this->debug('Debug Level 1', 1);
+        $this->debug('Debug Level 2', 2);
+        $this->debug('Debug Level 3', 3);
     }
 }

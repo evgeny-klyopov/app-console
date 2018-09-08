@@ -17,6 +17,6 @@ class ExampleTest extends Helper
      */
     public function printMessage()
     {
-        $this->output->write('print message in helper');
+        $this->output->write('print message in helper' . PHP_EOL);
     }
 }

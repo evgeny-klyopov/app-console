@@ -9,6 +9,5 @@ define('NAMESPACE_COMMANDS', 'Alva\AppConsole\Commands');
 define('NAMESPACE_HELPERS', 'Alva\AppConsole\Helpers');
 
 require PATH . '/vendor/autoload.php';
-use Alva\AppConsole\Application;
 
-(new Application())->run();
+(new Alva\AppConsole\Application())->run();

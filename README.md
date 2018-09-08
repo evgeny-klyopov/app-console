@@ -12,6 +12,15 @@ composer require alva/app-console
 ```bash
 ./mt your-command-alias
 ```
+5. For debug, set last arguments. Count letter v - debug level. Example:
+```bash
+./mt example-test vvv
+```
+write message, on debug level 3 (vvv)
+```bash
+$this->debug('Debug Level 3', 3);
+```
+
 
 ## Как использовать?
 1. Копируем файл src/bin/mt в корень проекта.
@@ -20,4 +29,12 @@ composer require alva/app-console
 4. Вызов
 ```bash
 ./mt алиас-вашей-команды
+```
+5. Для дебага, устанавливается последний аргумент. Количество букв v - уровень дебага. Например:
+```bash
+./mt example-test vvv
+```
+при установки уровня дебага равно 3 (vvv) будет выведено сообщение
+```bash
+$this->debug('Debug Level 3', 3);
 ```
