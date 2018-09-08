@@ -1,7 +1,7 @@
 # app-console
 
 ```bash
-composer require alva/app-console
+composer require alva/app-console:1.*
 ```
 
 ## How use?
