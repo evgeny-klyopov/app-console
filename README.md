@@ -1,7 +1,19 @@
 # app-console
 
+[![Version](https://img.shields.io/packagist/v/alva/app-console.svg)](https://packagist.org/packages/alva/app-console)
+[![License](https://img.shields.io/packagist/l/alva/app-console.svg)](https://github.com/evgeny-klyopov/app-console/blob/master/LICENSE)
+[![Downloads](https://img.shields.io/packagist/dt/alva/app-console.svg)](https://packagist.org/packages/alva/app-console)
+
+## Install
 ```bash
 composer require alva/app-console:1.*
+```
+```json
+{
+    "require": {
+        "alva/app-console": "1.*"
+    }
+}
 ```
 
 ## How use?
