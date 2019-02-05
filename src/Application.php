@@ -23,20 +23,37 @@ final class Application
 
     /**
      * Application constructor.
+     *
+     * @param string|null $name
+     * @param string|null $version
      */
-    public function __construct()
+    public function __construct(string $name = null, string $version = null)
     {
-        $this->app = new SymfonyConsole();
+        $this->app = new SymfonyConsole($name, $version);
+        $this->setCommands()
+            ->addCommands();
     }
 
     /**
-     * Run Application
+     * Get symfony application
      *
-     * @throws \Exception
+     * @return SymfonyConsole
      */
-    public function run(): void
+    public function getSymfonyConsole(): SymfonyConsole
     {
-        $this->setCommands()->addCommands()->run();
+        return $this->app;
+    }
+
+    /**
+     * Runs the current application.
+     *
+     * @return int 0 if everything went fine, or an error code
+     *
+     * @throws \Exception When running fails. Bypass this when {@link setCatchExceptions()}.
+     */
+    public function run()
+    {
+        return $this->app->run();
     }
 
     /**
@@ -54,14 +71,14 @@ final class Application
     /**
      * Register command
      *
-     * @return SymfonyConsole
+     * @return Application
      */
-    private function addCommands(): SymfonyConsole
+    private function addCommands(): Application
     {
         foreach ($this->commands as $class) {
             $this->app->add(new $class);
         }
 
-        return $this->app;
+        return $this;
     }
 }
